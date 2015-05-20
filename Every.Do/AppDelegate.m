@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "DetailViewController.h"
+#import "ToDo.h"
+#import "MasterViewController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -19,9 +21,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+    UINavigationController *detailNavigationController = [splitViewController.viewControllers lastObject];
+    detailNavigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    NSArray* tasks = @[[ToDo toDoWithTitle:@"Do Every.Do assignment" description:@"Today's assignment" andPriority:5],
+                       [ToDo toDoWithTitle:@"Finish tableView tutorial" description:@"Because it's really good" andPriority:4],
+                       [ToDo toDoWithTitle:@"Do today's readings and questions" description:@"Because that's today's work" andPriority:3],
+                       [ToDo toDoWithTitle:@"Finish Mafia game" description:@"Being behind on assignments sucks" andPriority:2],
+                       [ToDo toDoWithTitle:@"Do Saturday's readings and questions" description:@"To catch up on readings" andPriority:1]
+                       ];
+    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+    MasterViewController* masterViewController = masterNavigationController.viewControllers[0];
+    masterViewController.toDos = tasks;
+    
+    
+    
     return YES;
 }
 
