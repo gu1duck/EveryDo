@@ -10,8 +10,9 @@
 #import "TaskDetailViewController.h"
 #import "ToDoTableViewCell.h"
 #import "ToDo.h"
+#import "NewTaskTableViewController.h"
 
-@interface TaskListViewController ()
+@interface TaskListViewController ()<NewTaskTableViewControllerDelegate>
 
 @property NSMutableArray *objects;
 @end
@@ -29,10 +30,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    //self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (TaskDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
@@ -56,10 +57,15 @@
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ToDo* toDo = self.toDos[indexPath.row];
-        TaskDetailViewController *controller = (TaskDetailViewController *)[[segue destinationViewController] topViewController];
+        TaskDetailViewController *controller = (TaskDetailViewController*)[[segue destinationViewController] topViewController];
         [controller setDetailItem:toDo];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+    if([segue.identifier isEqualToString:@"newTask"]){
+        UINavigationController* navController = (UINavigationController*)segue.destinationViewController;
+        NewTaskTableViewController* controller = navController.viewControllers[0];
+        controller.delegate = self;
     }
 }
 
@@ -95,6 +101,19 @@
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
+}
+
+-(void)newTaskTableViewContreollerDidCancel{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)newTaskTableViewContreollerDidSave:(ToDo *)toDo{
+    self.toDos = [self.toDos arrayByAddingObject:toDo];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:[self.toDos count] -1 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    
 }
 
 @end

@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) ToDo* toDo;
 @property (weak, nonatomic) IBOutlet UILabel *todoNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *todoDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextView *todoDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *todoPriorityLabel;
 
 - (void)setDetailItem:(id)newDetailItem;
