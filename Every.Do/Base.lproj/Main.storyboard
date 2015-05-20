@@ -32,25 +32,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                <rect key="frame" x="20" y="292" width="560" height="17"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNA-L5-irc">
+                                <rect key="frame" x="16" y="72" width="488.5" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EC-X8-Ylo">
+                                <rect key="frame" x="16" y="103.5" width="568" height="496.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4v-OF-ChU">
+                                <rect key="frame" x="504.5" y="72" width="79.5" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leading" constant="20" symbolic="YES" id="Tsc-yG-G1q"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="jWN-iV-94e"/>
-                            <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="tHV-ZD-HQj"/>
+                            <constraint firstItem="R4v-OF-ChU" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="8" id="2Ki-lZ-jtT"/>
+                            <constraint firstItem="1EC-X8-Ylo" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="7Rx-7b-dk8"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="1EC-X8-Ylo" secondAttribute="bottom" id="F3T-TU-SOE"/>
+                            <constraint firstItem="WNA-L5-irc" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="8" id="VEB-nt-wIL"/>
+                            <constraint firstItem="WNA-L5-irc" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" id="Wi1-6p-J7k"/>
+                            <constraint firstItem="1EC-X8-Ylo" firstAttribute="top" secondItem="R4v-OF-ChU" secondAttribute="bottom" id="XuG-MI-SAS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WNA-L5-irc" secondAttribute="trailing" id="dGb-GN-UhX"/>
+                            <constraint firstItem="WNA-L5-irc" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="dJ7-Gy-kdh"/>
+                            <constraint firstItem="R4v-OF-ChU" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="fUx-lg-qTM"/>
+                            <constraint firstItem="R4v-OF-ChU" firstAttribute="leading" secondItem="WNA-L5-irc" secondAttribute="trailing" id="h2d-r1-4Di"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1EC-X8-Ylo" secondAttribute="trailing" id="iuq-7b-L4o"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Wi1-6p-J7k"/>
+                                <exclude reference="dGb-GN-UhX"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Task Detail" id="mOI-FS-AaM"/>
                     <connections>
-                        <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
+                        <outlet property="todoDescriptionLabel" destination="1EC-X8-Ylo" id="m9K-6D-DIC"/>
+                        <outlet property="todoNameLabel" destination="WNA-L5-irc" id="JRP-Nl-0dX"/>
+                        <outlet property="todoPriorityLabel" destination="R4v-OF-ChU" id="ZxT-Kq-MpW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJe-Yq-33r" sceneMemberID="firstResponder"/>
