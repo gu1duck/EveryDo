@@ -7,9 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "DetailViewController.h"
+#import "TaskDetailViewController.h"
 #import "ToDo.h"
-#import "MasterViewController.h"
+#import "TaskListViewController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -31,7 +31,7 @@
                        [ToDo toDoWithTitle:@"Do Saturday's readings and questions" description:@"To catch up on readings" andPriority:1]
                        ];
     UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-    MasterViewController* masterViewController = masterNavigationController.viewControllers[0];
+    TaskListViewController* masterViewController = masterNavigationController.viewControllers[0];
     masterViewController.toDos = tasks;
     
     
@@ -64,7 +64,7 @@
 #pragma mark - Split view
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[TaskDetailViewController class]] && ([(TaskDetailViewController *)[(UINavigationController *)secondaryViewController topViewController] toDo] == nil)) {
         // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
         return YES;
     } else {

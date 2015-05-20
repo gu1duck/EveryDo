@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		3F2128B71B0D07390047A03F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128B61B0D07390047A03F /* main.m */; };
 		3F2128BA1B0D07390047A03F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128B91B0D07390047A03F /* AppDelegate.m */; };
-		3F2128BD1B0D07390047A03F /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128BC1B0D07390047A03F /* MasterViewController.m */; };
-		3F2128C01B0D07390047A03F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128BF1B0D07390047A03F /* DetailViewController.m */; };
+		3F2128BD1B0D07390047A03F /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128BC1B0D07390047A03F /* TaskListViewController.m */; };
+		3F2128C01B0D07390047A03F /* TaskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128BF1B0D07390047A03F /* TaskDetailViewController.m */; };
 		3F2128C31B0D07390047A03F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F2128C11B0D07390047A03F /* Main.storyboard */; };
 		3F2128C51B0D07390047A03F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F2128C41B0D07390047A03F /* Images.xcassets */; };
 		3F2128C81B0D07390047A03F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2128C61B0D07390047A03F /* LaunchScreen.xib */; };
@@ -35,10 +35,10 @@
 		3F2128B61B0D07390047A03F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3F2128B81B0D07390047A03F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3F2128B91B0D07390047A03F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3F2128BB1B0D07390047A03F /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		3F2128BC1B0D07390047A03F /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		3F2128BE1B0D07390047A03F /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		3F2128BF1B0D07390047A03F /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		3F2128BB1B0D07390047A03F /* TaskListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
+		3F2128BC1B0D07390047A03F /* TaskListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
+		3F2128BE1B0D07390047A03F /* TaskDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskDetailViewController.h; sourceTree = "<group>"; };
+		3F2128BF1B0D07390047A03F /* TaskDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskDetailViewController.m; sourceTree = "<group>"; };
 		3F2128C21B0D07390047A03F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F2128C41B0D07390047A03F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3F2128C71B0D07390047A03F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -96,10 +96,10 @@
 				3F2128B91B0D07390047A03F /* AppDelegate.m */,
 				3F2128E01B0D0D9B0047A03F /* ToDoTableViewCell.h */,
 				3F2128E11B0D0D9B0047A03F /* ToDoTableViewCell.m */,
-				3F2128BB1B0D07390047A03F /* MasterViewController.h */,
-				3F2128BC1B0D07390047A03F /* MasterViewController.m */,
-				3F2128BE1B0D07390047A03F /* DetailViewController.h */,
-				3F2128BF1B0D07390047A03F /* DetailViewController.m */,
+				3F2128BB1B0D07390047A03F /* TaskListViewController.h */,
+				3F2128BC1B0D07390047A03F /* TaskListViewController.m */,
+				3F2128BE1B0D07390047A03F /* TaskDetailViewController.h */,
+				3F2128BF1B0D07390047A03F /* TaskDetailViewController.m */,
 				3F2128C11B0D07390047A03F /* Main.storyboard */,
 				3F2128C41B0D07390047A03F /* Images.xcassets */,
 				3F2128C61B0D07390047A03F /* LaunchScreen.xib */,
@@ -236,10 +236,10 @@
 			files = (
 				3F2128DF1B0D08E30047A03F /* ToDo.m in Sources */,
 				3F2128BA1B0D07390047A03F /* AppDelegate.m in Sources */,
-				3F2128BD1B0D07390047A03F /* MasterViewController.m in Sources */,
+				3F2128BD1B0D07390047A03F /* TaskListViewController.m in Sources */,
 				3F2128E21B0D0D9B0047A03F /* ToDoTableViewCell.m in Sources */,
 				3F2128B71B0D07390047A03F /* main.m in Sources */,
-				3F2128C01B0D07390047A03F /* DetailViewController.m in Sources */,
+				3F2128C01B0D07390047A03F /* TaskDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
