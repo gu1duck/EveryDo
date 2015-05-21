@@ -38,6 +38,12 @@
                              description:self.descriptionTextView.text
                              andPriority:(int)[self.priorityNumber.text integerValue]];
         [self.delegate newTaskTableViewContreollerDidSave:toDo];
+    } else {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Sorry Dave"
+                                                        message:@"I can't save a task without a title"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"I'm sorry too" otherButtonTitles: nil];
+        [alert show];
     }
 }
 
@@ -72,6 +78,19 @@
         return NO;
     }
     return YES;
+}
+
+-(void) priorityPickerTableViewController: (PriorityPickerTableViewController*)controller didSelectPriority: (int)priority{
+    self.priorityNumber.text = [NSString stringWithFormat:@"%d", priority];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"priorityPicker"]){
+        PriorityPickerTableViewController* controller = (PriorityPickerTableViewController*)segue.destinationViewController;
+        controller.priorityString = self.priorityNumber.text;
+        controller.delegate = self;
+    }
 }
 
 @end

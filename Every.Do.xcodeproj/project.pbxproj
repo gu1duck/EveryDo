@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0414A01B0D4D7C0034EF60 /* PriorityPickerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F04149F1B0D4D7C0034EF60 /* PriorityPickerTableViewController.m */; };
 		3F2128B71B0D07390047A03F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128B61B0D07390047A03F /* main.m */; };
 		3F2128BA1B0D07390047A03F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128B91B0D07390047A03F /* AppDelegate.m */; };
 		3F2128BD1B0D07390047A03F /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128BC1B0D07390047A03F /* TaskListViewController.m */; };
@@ -31,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F04149E1B0D4D7C0034EF60 /* PriorityPickerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityPickerTableViewController.h; sourceTree = "<group>"; };
+		3F04149F1B0D4D7C0034EF60 /* PriorityPickerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityPickerTableViewController.m; sourceTree = "<group>"; };
 		3F2128B11B0D07390047A03F /* Every.Do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Every.Do.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2128B51B0D07390047A03F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F2128B61B0D07390047A03F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +107,8 @@
 				3F2128BE1B0D07390047A03F /* TaskDetailViewController.h */,
 				3F2128BF1B0D07390047A03F /* TaskDetailViewController.m */,
 				3F2128C11B0D07390047A03F /* Main.storyboard */,
+				3F04149E1B0D4D7C0034EF60 /* PriorityPickerTableViewController.h */,
+				3F04149F1B0D4D7C0034EF60 /* PriorityPickerTableViewController.m */,
 				3F2128E31B0D2FB10047A03F /* NewTaskTableViewController.h */,
 				3F2128E41B0D2FB10047A03F /* NewTaskTableViewController.m */,
 				3F2128C41B0D07390047A03F /* Images.xcassets */,
@@ -244,6 +249,7 @@
 				3F2128BD1B0D07390047A03F /* TaskListViewController.m in Sources */,
 				3F2128E21B0D0D9B0047A03F /* ToDoTableViewCell.m in Sources */,
 				3F2128B71B0D07390047A03F /* main.m in Sources */,
+				3F0414A01B0D4D7C0034EF60 /* PriorityPickerTableViewController.m in Sources */,
 				3F2128C01B0D07390047A03F /* TaskDetailViewController.m in Sources */,
 				3F2128E51B0D2FB10047A03F /* NewTaskTableViewController.m in Sources */,
 			);
@@ -442,6 +448,7 @@
 				3F2128D91B0D07390047A03F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F2128DA1B0D07390047A03F /* Build configuration list for PBXNativeTarget "Every.DoTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +457,7 @@
 				3F2128DC1B0D07390047A03F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ToDo.h"
+#import "PriorityPickerTableViewController.h"
 
 @protocol NewTaskTableViewControllerDelegate <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface NewTaskTableViewController : UITableViewController
+@interface NewTaskTableViewController : UITableViewController <PriorityPickerViewControllerDelegate>
 
 @property (weak, nonatomic) id<NewTaskTableViewControllerDelegate> delegate;
 

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ToDo.h"
 
-@interface TaskDetailViewController : UIViewController
+
+@interface TaskDetailViewController : UIViewController 
 
 @property (strong, nonatomic) ToDo* toDo;
 @property (weak, nonatomic) IBOutlet UILabel *todoNameLabel;

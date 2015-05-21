@@ -12,7 +12,7 @@
 #import "ToDo.h"
 #import "NewTaskTableViewController.h"
 
-@interface TaskListViewController ()<NewTaskTableViewControllerDelegate>
+@interface TaskListViewController ()<NewTaskTableViewControllerDelegate, ToDoTableViewCellDelegate>
 
 @property NSMutableArray *objects;
 @end
@@ -81,13 +81,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ToDoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToDoCell" forIndexPath:indexPath];
+    cell.nameLabel.attributedText = nil;
+    cell.descriptionLabel.attributedText = nil;
+    cell.nameLabel.text= nil;
+    cell.descriptionLabel.text = nil;
+    cell.priorityLabel.text = nil;
+    cell.delegate = nil;
 
     ToDo* toDo = (ToDo*)self.toDos[indexPath.row];
-    cell.nameLabel.text = toDo.taskTitle;
-    cell.descriptionLabel.text = toDo.taskDescription;
+    if (toDo.completed){
+        NSAttributedString* struckTitle = [[NSAttributedString alloc] initWithString:toDo.taskTitle attributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]}];
+        NSAttributedString* struckDescription = [[NSAttributedString alloc] initWithString:toDo.taskDescription attributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]}];
+        cell.nameLabel.attributedText = struckTitle;
+        cell.descriptionLabel.attributedText = struckDescription;
+    } else {
+        cell.nameLabel.text= toDo.taskTitle;
+        cell.descriptionLabel.text = toDo.taskDescription;
+    }
     cell.priorityLabel.text = [NSString stringWithFormat:@"%d",toDo.taskPriority];
+    cell.delegate = self;
     return cell;
 }
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
@@ -112,8 +127,21 @@
     NSIndexPath *path = [NSIndexPath indexPathForRow:[self.toDos count] -1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
 
-    
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.editing) {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
+}
+
+-(void)toDoTableViewCellWasSwiped:(ToDoTableViewCell*)cell{
+    NSIndexPath* path = [self.tableView indexPathForCell:cell];
+    int swiped = (int)path.row;
+    ToDo* toDo = self.toDos[swiped];
+    toDo.completed = YES;
+    [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
