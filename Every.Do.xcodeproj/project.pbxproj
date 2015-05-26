@@ -19,6 +19,8 @@
 		3F2128DF1B0D08E30047A03F /* ToDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128DE1B0D08E30047A03F /* ToDo.m */; };
 		3F2128E21B0D0D9B0047A03F /* ToDoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128E11B0D0D9B0047A03F /* ToDoTableViewCell.m */; };
 		3F2128E51B0D2FB10047A03F /* NewTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128E41B0D2FB10047A03F /* NewTaskTableViewController.m */; };
+		3F2CDFBA1B13B25C00227403 /* ToDoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2CDFB91B13B25C00227403 /* ToDoNavigationController.m */; };
+		3F2CDFBD1B13B3B100227403 /* ToDoSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2CDFBC1B13B3B100227403 /* ToDoSplitViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		3F2128E11B0D0D9B0047A03F /* ToDoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoTableViewCell.m; sourceTree = "<group>"; };
 		3F2128E31B0D2FB10047A03F /* NewTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTaskTableViewController.h; sourceTree = "<group>"; };
 		3F2128E41B0D2FB10047A03F /* NewTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTaskTableViewController.m; sourceTree = "<group>"; };
+		3F2CDFB81B13B25C00227403 /* ToDoNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToDoNavigationController.h; path = ../ToDoNavigationController.h; sourceTree = "<group>"; };
+		3F2CDFB91B13B25C00227403 /* ToDoNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToDoNavigationController.m; path = ../ToDoNavigationController.m; sourceTree = "<group>"; };
+		3F2CDFBB1B13B3B100227403 /* ToDoSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoSplitViewController.h; sourceTree = "<group>"; };
+		3F2CDFBC1B13B3B100227403 /* ToDoSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoSplitViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,8 @@
 		3F2128B31B0D07390047A03F /* Every.Do */ = {
 			isa = PBXGroup;
 			children = (
+				3F2CDFB81B13B25C00227403 /* ToDoNavigationController.h */,
+				3F2CDFB91B13B25C00227403 /* ToDoNavigationController.m */,
 				3F2128DD1B0D08E30047A03F /* ToDo.h */,
 				3F2128DE1B0D08E30047A03F /* ToDo.m */,
 				3F2128B81B0D07390047A03F /* AppDelegate.h */,
@@ -107,6 +115,8 @@
 				3F2128BE1B0D07390047A03F /* TaskDetailViewController.h */,
 				3F2128BF1B0D07390047A03F /* TaskDetailViewController.m */,
 				3F2128C11B0D07390047A03F /* Main.storyboard */,
+				3F2CDFBB1B13B3B100227403 /* ToDoSplitViewController.h */,
+				3F2CDFBC1B13B3B100227403 /* ToDoSplitViewController.m */,
 				3F04149E1B0D4D7C0034EF60 /* PriorityPickerTableViewController.h */,
 				3F04149F1B0D4D7C0034EF60 /* PriorityPickerTableViewController.m */,
 				3F2128E31B0D2FB10047A03F /* NewTaskTableViewController.h */,
@@ -246,12 +256,14 @@
 			files = (
 				3F2128DF1B0D08E30047A03F /* ToDo.m in Sources */,
 				3F2128BA1B0D07390047A03F /* AppDelegate.m in Sources */,
+				3F2CDFBA1B13B25C00227403 /* ToDoNavigationController.m in Sources */,
 				3F2128BD1B0D07390047A03F /* TaskListViewController.m in Sources */,
 				3F2128E21B0D0D9B0047A03F /* ToDoTableViewCell.m in Sources */,
 				3F2128B71B0D07390047A03F /* main.m in Sources */,
 				3F0414A01B0D4D7C0034EF60 /* PriorityPickerTableViewController.m in Sources */,
 				3F2128C01B0D07390047A03F /* TaskDetailViewController.m in Sources */,
 				3F2128E51B0D2FB10047A03F /* NewTaskTableViewController.m in Sources */,
+				3F2CDFBD1B13B3B100227403 /* ToDoSplitViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

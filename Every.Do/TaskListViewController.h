@@ -15,6 +15,8 @@
 @property (strong, nonatomic) TaskDetailViewController *detailViewController;
 @property (strong, nonatomic) NSArray* toDos;
 
+-(void)saveTasks;
+
 
 @end
 

@@ -24,16 +24,20 @@
     UINavigationController *detailNavigationController = [splitViewController.viewControllers lastObject];
     detailNavigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
-    NSArray* tasks = @[[ToDo toDoWithTitle:@"Do Every.Do assignment" description:@"Today's assignment" andPriority:5],
-                       [ToDo toDoWithTitle:@"Finish tableView tutorial" description:@"Because it's really good" andPriority:4],
-                       [ToDo toDoWithTitle:@"Do today's readings and questions" description:@"Because that's today's work" andPriority:3],
-                       [ToDo toDoWithTitle:@"Finish Mafia game" description:@"Being behind on assignments sucks" andPriority:2],
-                       [ToDo toDoWithTitle:@"Do Saturday's readings and questions" description:@"To catch up on readings" andPriority:1]
-                       ];
-    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-    TaskListViewController* masterViewController = masterNavigationController.viewControllers[0];
-    masterViewController.toDos = tasks;
+//    NSArray* tasks = @[[ToDo toDoWithTitle:@"Do Every.Do assignment" description:@"Today's assignment" andPriority:5],
+//                       [ToDo toDoWithTitle:@"Finish tableView tutorial" description:@"Because it's really good" andPriority:4],
+//                       [ToDo toDoWithTitle:@"Do today's readings and questions" description:@"Because that's today's work" andPriority:3],
+//                       [ToDo toDoWithTitle:@"Finish Mafia game" description:@"Being behind on assignments sucks" andPriority:2],
+//                       [ToDo toDoWithTitle:@"Do Saturday's readings and questions" description:@"To catch up on readings" andPriority:1]
+//                       ];
+//    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+//    TaskListViewController* masterViewController = masterNavigationController.viewControllers[0];
     
+    
+    UINavigationBar* defaultNav = [UINavigationBar appearance];
+    defaultNav.barTintColor = [UIColor colorWithRed:0.3 green:0.5 blue:1.0 alpha:0.5];
+    defaultNav.tintColor = [UIColor whiteColor];
+    defaultNav.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
     
     return YES;
@@ -47,6 +51,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    UINavigationController* masterNavigationController = splitViewController.viewControllers[0];
+    TaskListViewController* masterViewController = masterNavigationController.viewControllers[0];
+    
+    [masterViewController saveTasks];
+
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

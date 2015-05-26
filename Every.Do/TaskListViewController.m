@@ -19,6 +19,8 @@
 
 @implementation TaskListViewController
 
+#pragma mark - Init
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -29,27 +31,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    //self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (TaskDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    if (!self.toDos){
+        self.toDos = @[];
+    }
+    NSArray* savedTasks = [NSKeyedUnarchiver unarchiveObjectWithFile:[self getFilePath]];
+    if (savedTasks){
+        self.toDos = savedTasks;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
-    }
-    [self.objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
 
 #pragma mark - Segues
 
@@ -105,18 +100,25 @@
 
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        [self.objects removeObjectAtIndex:indexPath.row];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//    }
+//}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.editing) {
+        return UITableViewCellEditingStyleDelete;
     }
+    return UITableViewCellEditingStyleNone;
 }
+
+#pragma mark - newTaskTableViewControllerDelegate methods
 
 -(void)newTaskTableViewContreollerDidCancel{
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -129,12 +131,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.editing) {
-        return UITableViewCellEditingStyleDelete;
-    }
-    return UITableViewCellEditingStyleNone;
-}
+#pragma mark - toDoTableViewCellDelegate methods
 
 -(void)toDoTableViewCellWasSwiped:(ToDoTableViewCell*)cell{
     NSIndexPath* path = [self.tableView indexPathForCell:cell];
@@ -142,6 +139,18 @@
     ToDo* toDo = self.toDos[swiped];
     toDo.completed = YES;
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+#pragma mark - helper methods
+
+-(NSString*)getFilePath{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+    return [documentsDirectoryPath stringByAppendingPathComponent:@"appData"];
+}
+
+-(void)saveTasks{
+    [NSKeyedArchiver archiveRootObject:self.toDos toFile:[self getFilePath]];
 }
 
 @end
