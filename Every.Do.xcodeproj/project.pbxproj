@@ -19,6 +19,10 @@
 		3F2128DF1B0D08E30047A03F /* ToDo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128DE1B0D08E30047A03F /* ToDo.m */; };
 		3F2128E21B0D0D9B0047A03F /* ToDoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128E11B0D0D9B0047A03F /* ToDoTableViewCell.m */; };
 		3F2128E51B0D2FB10047A03F /* NewTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2128E41B0D2FB10047A03F /* NewTaskTableViewController.m */; };
+		3F2B08131B158E7300E5F0F7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2B08121B158E7300E5F0F7 /* CoreData.framework */; };
+		3F2B08161B158EC900E5F0F7 /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B08151B158EC900E5F0F7 /* CoreDataStack.m */; };
+		3F2B08191B15929800E5F0F7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B08171B15929800E5F0F7 /* Model.xcdatamodeld */; };
+		3F2B081C1B15934900E5F0F7 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B081B1B15934900E5F0F7 /* Task.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,12 @@
 		3F2128E11B0D0D9B0047A03F /* ToDoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoTableViewCell.m; sourceTree = "<group>"; };
 		3F2128E31B0D2FB10047A03F /* NewTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTaskTableViewController.h; sourceTree = "<group>"; };
 		3F2128E41B0D2FB10047A03F /* NewTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTaskTableViewController.m; sourceTree = "<group>"; };
+		3F2B08121B158E7300E5F0F7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3F2B08141B158EC900E5F0F7 /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
+		3F2B08151B158EC900E5F0F7 /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
+		3F2B08181B15929800E5F0F7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		3F2B081A1B15934900E5F0F7 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		3F2B081B1B15934900E5F0F7 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F2B08131B158E7300E5F0F7 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +89,7 @@
 		3F2128A81B0D07390047A03F = {
 			isa = PBXGroup;
 			children = (
+				3F2B08121B158E7300E5F0F7 /* CoreData.framework */,
 				3F2128B31B0D07390047A03F /* Every.Do */,
 				3F2128D01B0D07390047A03F /* Every.DoTests */,
 				3F2128B21B0D07390047A03F /* Products */,
@@ -96,6 +108,10 @@
 		3F2128B31B0D07390047A03F /* Every.Do */ = {
 			isa = PBXGroup;
 			children = (
+				3F2B08141B158EC900E5F0F7 /* CoreDataStack.h */,
+				3F2B08151B158EC900E5F0F7 /* CoreDataStack.m */,
+				3F2B081A1B15934900E5F0F7 /* Task.h */,
+				3F2B081B1B15934900E5F0F7 /* Task.m */,
 				3F2128DD1B0D08E30047A03F /* ToDo.h */,
 				3F2128DE1B0D08E30047A03F /* ToDo.m */,
 				3F2128B81B0D07390047A03F /* AppDelegate.h */,
@@ -111,6 +127,7 @@
 				3F04149F1B0D4D7C0034EF60 /* PriorityPickerTableViewController.m */,
 				3F2128E31B0D2FB10047A03F /* NewTaskTableViewController.h */,
 				3F2128E41B0D2FB10047A03F /* NewTaskTableViewController.m */,
+				3F2B08171B15929800E5F0F7 /* Model.xcdatamodeld */,
 				3F2128C41B0D07390047A03F /* Images.xcassets */,
 				3F2128C61B0D07390047A03F /* LaunchScreen.xib */,
 				3F2128B41B0D07390047A03F /* Supporting Files */,
@@ -247,11 +264,14 @@
 				3F2128DF1B0D08E30047A03F /* ToDo.m in Sources */,
 				3F2128BA1B0D07390047A03F /* AppDelegate.m in Sources */,
 				3F2128BD1B0D07390047A03F /* TaskListViewController.m in Sources */,
+				3F2B081C1B15934900E5F0F7 /* Task.m in Sources */,
 				3F2128E21B0D0D9B0047A03F /* ToDoTableViewCell.m in Sources */,
 				3F2128B71B0D07390047A03F /* main.m in Sources */,
 				3F0414A01B0D4D7C0034EF60 /* PriorityPickerTableViewController.m in Sources */,
 				3F2128C01B0D07390047A03F /* TaskDetailViewController.m in Sources */,
+				3F2B08191B15929800E5F0F7 /* Model.xcdatamodeld in Sources */,
 				3F2128E51B0D2FB10047A03F /* NewTaskTableViewController.m in Sources */,
+				3F2B08161B158EC900E5F0F7 /* CoreDataStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +480,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3F2B08171B15929800E5F0F7 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3F2B08181B15929800E5F0F7 /* Model.xcdatamodel */,
+			);
+			currentVersion = 3F2B08181B15929800E5F0F7 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3F2128A91B0D07390047A03F /* Project object */;
 }
