@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ToDo.h"
+#import "Task.h"
 
 
 @interface TaskDetailViewController : UIViewController 
 
-@property (strong, nonatomic) ToDo* toDo;
+@property (strong, nonatomic) Task* toDo;
 @property (weak, nonatomic) IBOutlet UILabel *todoNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *todoDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *todoPriorityLabel;

@@ -40,9 +40,13 @@
      
 - (IBAction)done:(id)sender {
     if (![self.nameTextField.text isEqualToString:@""]){
-        ToDo* toDo = [ToDo toDoWithTitle:self.nameTextField.text
-                             description:self.descriptionTextView.text
-                             andPriority:(int)[self.priorityNumber.text integerValue]];
+        NSEntityDescription* entity = [NSEntityDescription entityForName:NSStringFromClass([Task class])
+                                                  inManagedObjectContext:self.context];
+        Task* toDo = [[Task alloc] initWithEntity:entity
+                   insertIntoManagedObjectContext:self.context];
+        toDo.taskTitle = self.nameTextField.text;
+        toDo.taskDescription = self.descriptionTextView.text;
+        toDo.taskPriority = (int)[self.priorityNumber.text integerValue];
         [self.delegate newTaskTableViewContreollerDidSave:toDo];
     } else {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Sorry Dave"

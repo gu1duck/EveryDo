@@ -7,18 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ToDo.h"
+#import "Task.h"
 #import "PriorityPickerTableViewController.h"
 
 @protocol NewTaskTableViewControllerDelegate <NSObject>
 
 - (void) newTaskTableViewContreollerDidCancel;
-- (void) newTaskTableViewContreollerDidSave:(ToDo*)toDo;
+- (void) newTaskTableViewContreollerDidSave:(Task*)toDo;
 
 @end
 
 @interface NewTaskTableViewController : UITableViewController <PriorityPickerViewControllerDelegate>
 
 @property (weak, nonatomic) id<NewTaskTableViewControllerDelegate> delegate;
+@property (nonatomic) NSManagedObjectContext* context;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TaskDetailViewController.h"
-#import "ToDo.h"
+#import "Task.h"
 #import "TaskListViewController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
@@ -24,15 +24,15 @@
     UINavigationController *detailNavigationController = [splitViewController.viewControllers lastObject];
     detailNavigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
-    NSArray* tasks = @[[ToDo toDoWithTitle:@"Do Every.Do assignment" description:@"Today's assignment" andPriority:5],
-                       [ToDo toDoWithTitle:@"Finish tableView tutorial" description:@"Because it's really good" andPriority:4],
-                       [ToDo toDoWithTitle:@"Do today's readings and questions" description:@"Because that's today's work" andPriority:3],
-                       [ToDo toDoWithTitle:@"Finish Mafia game" description:@"Being behind on assignments sucks" andPriority:2],
-                       [ToDo toDoWithTitle:@"Do Saturday's readings and questions" description:@"To catch up on readings" andPriority:1]
-                       ];
-    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-    TaskListViewController* masterViewController = masterNavigationController.viewControllers[0];
-    masterViewController.toDos = tasks;
+//    NSArray* tasks = @[[ToDo toDoWithTitle:@"Do Every.Do assignment" description:@"Today's assignment" andPriority:5],
+//                       [ToDo toDoWithTitle:@"Finish tableView tutorial" description:@"Because it's really good" andPriority:4],
+//                       [ToDo toDoWithTitle:@"Do today's readings and questions" description:@"Because that's today's work" andPriority:3],
+//                       [ToDo toDoWithTitle:@"Finish Mafia game" description:@"Being behind on assignments sucks" andPriority:2],
+//                       [ToDo toDoWithTitle:@"Do Saturday's readings and questions" description:@"To catch up on readings" andPriority:1]
+//                       ];
+//    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+//    TaskListViewController* masterViewController = masterNavigationController.viewControllers[0];
+//    masterViewController.toDos = tasks;
     
     
     UINavigationBar* navBarAppearance = [UINavigationBar appearance];

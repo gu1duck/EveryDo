@@ -9,7 +9,7 @@
 #import "TaskListViewController.h"
 #import "TaskDetailViewController.h"
 #import "ToDoTableViewCell.h"
-#import "ToDo.h"
+#import "Task.h"
 #import "NewTaskTableViewController.h"
 
 @interface TaskListViewController ()<NewTaskTableViewControllerDelegate, ToDoTableViewCellDelegate>
@@ -36,7 +36,7 @@
     //self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (TaskDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     CoreDataStack* coreData = [[CoreDataStack alloc]init];
-    [coreData managedObjectContext];
+    self.context = coreData.managedObjectContext;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +58,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        ToDo* toDo = self.toDos[indexPath.row];
+        Task* toDo = self.toDos[indexPath.row];
         TaskDetailViewController *controller = (TaskDetailViewController*)[[segue destinationViewController] topViewController];
         [controller setDetailItem:toDo];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
@@ -68,6 +68,7 @@
         UINavigationController* navController = (UINavigationController*)segue.destinationViewController;
         NewTaskTableViewController* controller = navController.viewControllers[0];
         controller.delegate = self;
+        controller.context = self.context;
     }
 }
 
@@ -90,7 +91,7 @@
     cell.priorityLabel.text = nil;
     cell.delegate = nil;
 
-    ToDo* toDo = (ToDo*)self.toDos[indexPath.row];
+    Task* toDo = (Task*)self.toDos[indexPath.row];
     if (toDo.completed){
         NSAttributedString* struckTitle = [[NSAttributedString alloc] initWithString:toDo.taskTitle attributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]}];
         NSAttributedString* struckDescription = [[NSAttributedString alloc] initWithString:toDo.taskDescription attributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]}];
@@ -124,7 +125,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)newTaskTableViewContreollerDidSave:(ToDo *)toDo{
+-(void)newTaskTableViewContreollerDidSave:(Task*)toDo{
     self.toDos = [self.toDos arrayByAddingObject:toDo];
     NSIndexPath *path = [NSIndexPath indexPathForRow:[self.toDos count] -1 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -141,7 +142,7 @@
 -(void)toDoTableViewCellWasSwiped:(ToDoTableViewCell*)cell{
     NSIndexPath* path = [self.tableView indexPathForCell:cell];
     int swiped = (int)path.row;
-    ToDo* toDo = self.toDos[swiped];
+    Task* toDo = self.toDos[swiped];
     toDo.completed = YES;
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
