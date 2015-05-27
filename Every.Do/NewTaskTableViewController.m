@@ -12,10 +12,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UILabel *priorityNumber;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIView *accessoryView;
 
 @end
 
 @implementation NewTaskTableViewController
+
+- (IBAction)accessoryViewDone:(id)sender {
+    [self.descriptionTextView resignFirstResponder];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,6 +32,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.descriptionTextView.inputAccessoryView = self.accessoryView;
 }
 - (IBAction)cancel:(id)sender {
     [self.delegate newTaskTableViewContreollerDidCancel];
@@ -64,18 +70,6 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField == self.nameTextField){
         [self.nameTextField resignFirstResponder];
-    }
-    return YES;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
- replacementText:(NSString *)text
-{
-    
-    if ([text isEqualToString:@"\n"]) {
-        
-        [textView resignFirstResponder];
-        return NO;
     }
     return YES;
 }

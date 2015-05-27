@@ -174,10 +174,10 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ULG-Re-5fe" firstAttribute="bottom" secondItem="JaZ-Af-BOk" secondAttribute="bottomMargin" id="aj1-Zx-hgB"/>
-                                                <constraint firstItem="ULG-Re-5fe" firstAttribute="top" secondItem="JaZ-Af-BOk" secondAttribute="topMargin" id="fxC-0e-FNp"/>
-                                                <constraint firstItem="ULG-Re-5fe" firstAttribute="leading" secondItem="JaZ-Af-BOk" secondAttribute="leadingMargin" id="qSK-TU-wP3"/>
-                                                <constraint firstItem="ULG-Re-5fe" firstAttribute="trailing" secondItem="JaZ-Af-BOk" secondAttribute="trailingMargin" id="wCR-vm-ZYd"/>
+                                                <constraint firstItem="ULG-Re-5fe" firstAttribute="leading" secondItem="JaZ-Af-BOk" secondAttribute="leadingMargin" id="6Tx-Td-YTD"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ULG-Re-5fe" secondAttribute="bottom" id="Rgt-C9-VZE"/>
+                                                <constraint firstItem="ULG-Re-5fe" firstAttribute="top" secondItem="JaZ-Af-BOk" secondAttribute="topMargin" id="gaU-mf-7di"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ULG-Re-5fe" secondAttribute="trailing" id="if1-Pv-MqF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -202,12 +202,45 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="accessoryView" destination="tfw-Vb-rb0" id="wam-MD-Fbt"/>
                         <outlet property="descriptionTextView" destination="ULG-Re-5fe" id="5Ib-5i-xY3"/>
                         <outlet property="nameTextField" destination="2m8-Vu-H4D" id="9p7-V6-QSu"/>
                         <outlet property="priorityNumber" destination="F5w-nv-n9X" id="Pc8-wz-v36"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQ1-Et-FbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfw-Vb-rb0">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwh-00-3WH">
+                            <rect key="frame" x="536" y="5" width="56" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="tAj-PF-UFP"/>
+                                <constraint firstAttribute="width" constant="56" id="uxZ-3l-tIe"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                            <state key="normal" title="Done">
+                                <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="accessoryViewDone:" destination="ZKc-tM-Dv8" eventType="touchUpInside" id="cQe-Iy-x47"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="uwh-00-3WH" secondAttribute="trailing" constant="8" id="FgS-xY-HjO"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="H6C-eu-z9M"/>
+                        <constraint firstAttribute="centerY" secondItem="uwh-00-3WH" secondAttribute="centerY" id="Ufy-PB-XlK"/>
+                        <constraint firstAttribute="height" constant="44" id="Ywq-sv-wcq"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="H6C-eu-z9M"/>
+                        </mask>
+                    </variation>
+                </view>
             </objects>
             <point key="canvasLocation" x="1406" y="-1335"/>
         </scene>

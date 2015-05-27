@@ -35,6 +35,11 @@
     masterViewController.toDos = tasks;
     
     
+    UINavigationBar* navBarAppearance = [UINavigationBar appearance];
+    [self.window setTintColor:[UIColor orangeColor]];
+    //navBarAppearance.tintColor = [UIColor orangeColor];
+    navBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor orangeColor]};
+    
     
     return YES;
 }
