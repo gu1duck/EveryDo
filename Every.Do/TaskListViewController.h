@@ -15,7 +15,6 @@
 @interface TaskListViewController : UITableViewController
 
 @property (strong, nonatomic) TaskDetailViewController *detailViewController;
-@property (strong, nonatomic) NSArray* toDos;
 @property (nonatomic) NSManagedObjectContext* context;
 
 

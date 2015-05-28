@@ -12,9 +12,9 @@
 #import "Task.h"
 #import "NewTaskTableViewController.h"
 
-@interface TaskListViewController ()<NewTaskTableViewControllerDelegate, ToDoTableViewCellDelegate>
+@interface TaskListViewController ()<NewTaskTableViewControllerDelegate, ToDoTableViewCellDelegate, NSFetchedResultsControllerDelegate>
 
-@property NSMutableArray *objects;
+@property (nonatomic) NSFetchedResultsController* fetchedResults;
 @end
 
 @implementation TaskListViewController
@@ -29,14 +29,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    //UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    //self.navigationItem.rightBarButtonItem = addButton;
+    
     self.detailViewController = (TaskDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     CoreDataStack* coreData = [[CoreDataStack alloc]init];
     self.context = coreData.managedObjectContext;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,22 +41,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender {
-    if (!self.objects) {
-        self.objects = [[NSMutableArray alloc] init];
-    }
-    [self.objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Task* toDo = self.toDos[indexPath.row];
-        TaskDetailViewController *controller = (TaskDetailViewController*)[[segue destinationViewController] topViewController];
+        Task* toDo = [self.fetchedResults objectAtIndexPath:indexPath];        TaskDetailViewController *controller = (TaskDetailViewController*)[[segue destinationViewController] topViewController];
         [controller setDetailItem:toDo];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
@@ -75,11 +62,12 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 1;//[[self.fetchedResults sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.toDos.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResults sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,7 +79,7 @@
     cell.priorityLabel.text = nil;
     cell.delegate = nil;
 
-    Task* toDo = (Task*)self.toDos[indexPath.row];
+    Task* toDo = [self.fetchedResults objectAtIndexPath:indexPath];
     if (toDo.completed){
         NSAttributedString* struckTitle = [[NSAttributedString alloc] initWithString:toDo.taskTitle attributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]}];
         NSAttributedString* struckDescription = [[NSAttributedString alloc] initWithString:toDo.taskDescription attributes:@{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]}];
@@ -106,45 +94,121 @@
     return cell;
 }
 
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (self.tableView.editing) {
+//        return UITableViewCellEditingStyleDelete;
+//    }
+    return UITableViewCellEditingStyleDelete;
 }
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    //Task* thisTask = [self.fetchedResults objectAtIndexPath:indexPath];
+}
+
+#pragma mark - newTaskTableViewControllerDelegate Methods
 
 -(void)newTaskTableViewContreollerDidCancel{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)newTaskTableViewContreollerDidSave:(Task*)toDo{
-    self.toDos = [self.toDos arrayByAddingObject:toDo];
-    NSIndexPath *path = [NSIndexPath indexPathForRow:[self.toDos count] -1 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.tableView.editing) {
-        return UITableViewCellEditingStyleDelete;
+    [self.context insertObject:toDo];
+    NSError* error;
+    if (![self.context save:&error]){
+        NSLog(@"Couldn't save: %@, %@", error, error.description);
     }
-    return UITableViewCellEditingStyleNone;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)toDoTableViewCellWasSwiped:(ToDoTableViewCell*)cell{
     NSIndexPath* path = [self.tableView indexPathForCell:cell];
-    int swiped = (int)path.row;
-    Task* toDo = self.toDos[swiped];
+    Task* toDo = [self.fetchedResults objectAtIndexPath:path];
     toDo.completed = YES;
+    NSError* error;
+    if (![self.context save:&error]){
+        NSLog(@"Couldn't save: %@, %@", error, error.description);
+    }
     [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+#pragma mark - fetch
+
+-(NSFetchedResultsController*)fetchedResults{
+    if (_fetchedResults){
+        return _fetchedResults;
+    }
+    NSEntityDescription* entity = [NSEntityDescription entityForName:NSStringFromClass([Task class]) inManagedObjectContext:self.context];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"taskPriority" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    self.fetchedResults = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.context sectionNameKeyPath:nil cacheName:nil];
+    self.fetchedResults.delegate = self;
+    NSError* error;
+    if (![self.fetchedResults performFetch:&error]){
+        NSLog(@"%@, %@", error, error.description);
+    }
+    return _fetchedResults;
+    
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        default:
+            return;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
+
 
 @end
